@@ -6,7 +6,7 @@
 <title>Invitación</title>
 
 <style>
-  /* FUENTE ELEGANTE PARA LAS FRASES */
+  /* FUENTE ELEGANTE (Se mantiene por si la usas en otro lado) */
   @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
   /* RESET Y BODY */
@@ -88,12 +88,12 @@
   /* EFECTO INTERACTIVO AL TOCAR/DESLIZAR */
   .touch-particle {
     position: fixed;
-    pointer-events: none; /* Para que no bloqueen los botones reales */
-    color: #d8a1b4;
+    pointer-events: none; 
+    color: #8F9779; /* Verde salvia */
     z-index: 9998;
     white-space: nowrap;
     animation: float-fade 1.2s ease-out forwards;
-    transform: translate(-50%, -50%); /* Centra el elemento exactamente en el cursor/dedo */
+    transform: translate(-50%, -50%); 
   }
 
   @keyframes float-fade {
@@ -135,7 +135,7 @@
   
   <!-- BOTONES -->
   <div class="button" style="top:47.8%; width:45%; height:2.2%;" 
-       onclick="window.open(' https://maps.app.goo.gl/Pak55oiBXai5pmhz7')"></div>
+       onclick="window.open('https://maps.app.goo.gl/Pak55oiBXai5pmhz7')"></div>
 
   <div class="button" style="top:53.3%; width:45%; height:2.2%;" 
        onclick="window.open('https://maps.app.goo.gl/CUfuMo6JtGKLbWRE9')"></div>
@@ -163,30 +163,24 @@ const musicIcon = document.getElementById("musicIcon");
 
 let invitationOpened = false;
 let lastSpawnTime = 0;
-const elementos = ["✿"];
 
-// FUNCIÓN QUE CREA EL ELEMENTO EN EL DEDO/CURSOR
+// FUNCIÓN QUE CREA LA FLOR EN EL DEDO/CURSOR
 function spawnElement(x, y) {
-  if (!invitationOpened) return; // Solo funciona si ya entraron a la invitación
+  if (!invitationOpened) return;
 
   const now = Date.now();
-  if (now - lastSpawnTime < 150) return; // Espera 150ms entre cada aparición para no saturar
+  if (now - lastSpawnTime < 150) return; 
   lastSpawnTime = now;
 
   let particle = document.createElement("div");
   particle.className = "touch-particle";
   
-  let contenido = elementos[Math.floor(Math.random() * elementos.length)];
-  particle.innerHTML = contenido;
+  // Solo genera la flor
+  particle.innerHTML = "✿";
 
-  if (contenido !== "✿") {
-    particle.style.fontFamily = "'Great Vibes', cursive";
-    let sizeText = Math.random() * 10 + 25; 
-    particle.style.fontSize = sizeText + "px";
-  } else {
-    let sizeFlower = Math.random() * 15 + 30; 
-    particle.style.fontSize = sizeFlower + "px";
-  }
+  // Tamaño grande para la flor (entre 40px y 65px)
+  let sizeFlower = Math.random() * 25 + 40; 
+  particle.style.fontSize = sizeFlower + "px";
 
   // Posición exacta en la pantalla
   particle.style.left = x + "px";
@@ -194,13 +188,13 @@ function spawnElement(x, y) {
 
   document.body.appendChild(particle);
 
-  // Borra el elemento del código después de 1.2 segundos (lo que dura la animación)
+  // Borra el elemento después de la animación
   setTimeout(() => {
     particle.remove();
   }, 1200);
 }
 
-// ESCUCHADORES DE EVENTOS PARA CELULAR Y COMPUTADORA
+// ESCUCHADORES DE EVENTOS
 window.addEventListener('mousemove', (e) => {
   spawnElement(e.clientX, e.clientY);
 });
@@ -216,7 +210,7 @@ ingresarBtn.addEventListener('click', () => {
     intro.style.display = "none";
     content.style.display = "block";
     
-    invitationOpened = true; // Activa el efecto del dedo
+    invitationOpened = true; 
     musicIcon.style.display = "block";
     player.play().catch(() => console.log("Autoplay bloqueado"));
   }, 800);
