@@ -6,7 +6,6 @@
 <title>Invitación</title>
 
 <style>
-  /* FUENTE ELEGANTE (Se mantiene por si la usas en otro lado) */
   @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
 
   /* RESET Y BODY */
@@ -89,7 +88,7 @@
   .touch-particle {
     position: fixed;
     pointer-events: none; 
-    color: #8F9779; /* Verde salvia */
+    color: #8F9779; 
     z-index: 9998;
     white-space: nowrap;
     animation: float-fade 1.2s ease-out forwards;
@@ -101,7 +100,7 @@
     100% { opacity: 0; transform: translate(-50%, -120px) scale(1.2); }
   }
 
-  /* ÍCONO DE MÚSICA */
+  /* ÍCONO Y TEXTO DE MÚSICA */
   #musicIcon {
     position: fixed;
     bottom: 20px;
@@ -112,6 +111,21 @@
     z-index: 99999;
     display: none;
     animation: spin-slow 8s linear infinite;
+  }
+
+  #musicText {
+    position: fixed;
+    bottom: 85px; /* Lo ubica justo encima del botón */
+    right: 10px;
+    width: 80px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 10px;
+    line-height: 1.2;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    z-index: 99999;
+    display: none;
+    pointer-events: none; /* Evita que el texto bloquee los toques */
   }
 
   @keyframes spin-slow {
@@ -147,11 +161,12 @@
        onclick="window.open('https://drive.google.com/drive/folders/1YYa9alkMSJ0BgUbE2Efsrl8MRLYdE_5q?usp=drive_link')"></div>
 </div>
 
-<!-- AUDIO -->
+<!-- AUDIO Y CONTROLES VISUALES -->
 <audio id="player" loop>
   <source src="musicaboda.mp3" type="audio/mpeg">
 </audio>
 
+<div id="musicText">Presiona para parar o reproducir la música</div>
 <img id="musicIcon" src="botonmusica.png" alt="Botón Música">
 
 <script>
@@ -160,6 +175,7 @@ const ingresarBtn = document.getElementById("ingresarBtn");
 const content = document.getElementById("content");
 const player = document.getElementById('player');
 const musicIcon = document.getElementById("musicIcon");
+const musicText = document.getElementById("musicText");
 
 let invitationOpened = false;
 let lastSpawnTime = 0;
@@ -175,20 +191,16 @@ function spawnElement(x, y) {
   let particle = document.createElement("div");
   particle.className = "touch-particle";
   
-  // Solo genera la flor
   particle.innerHTML = "✿";
 
-  // Tamaño grande para la flor (entre 40px y 65px)
   let sizeFlower = Math.random() * 25 + 40; 
   particle.style.fontSize = sizeFlower + "px";
 
-  // Posición exacta en la pantalla
   particle.style.left = x + "px";
   particle.style.top = y + "px";
 
   document.body.appendChild(particle);
 
-  // Borra el elemento después de la animación
   setTimeout(() => {
     particle.remove();
   }, 1200);
@@ -212,6 +224,7 @@ ingresarBtn.addEventListener('click', () => {
     
     invitationOpened = true; 
     musicIcon.style.display = "block";
+    musicText.style.display = "block"; // Muestra el texto junto con el botón
     player.play().catch(() => console.log("Autoplay bloqueado"));
   }, 800);
 });
