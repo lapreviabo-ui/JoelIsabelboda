@@ -18,7 +18,7 @@
     overflow-x: hidden;
   }
 
-  /* PANTALLA DE INICIO (PORTADA ORIGINAL INTACTA) */
+  /* PANTALLA DE INICIO (PORTADA AJUSTADA) */
   #introScreen {
     position: fixed;
     inset: 0;
@@ -27,19 +27,22 @@
     background: url('portada.png') center/cover no-repeat;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    /* flex-end empuja los elementos hacia abajo para que no choquen con los nombres */
+    justify-content: flex-end; 
     align-items: center;
-    padding-bottom: 80px;
+    /* padding-bottom usa 'vh' (altura de pantalla) para caer siempre en la zona blanca debajo de la franja verde */
+    padding-bottom: 15vh; 
     z-index: 9999;
     transition: opacity 0.8s ease;
   }
 
   #introScreen h1 {
     color: black;
-    font-size: 28px;
-    margin-bottom: 20px;
+    font-size: 26px;
+    margin-bottom: 15px;
     letter-spacing: 3px;
     text-align: center;
+    text-shadow: 0px 0px 10px rgba(255,255,255,0.8); /* Sombra blanca ligera para máxima legibilidad */
   }
 
   #ingresarBtn {
@@ -74,7 +77,7 @@
     display: block;
   }
 
-  /* BOTONES TRANSPARENTES */
+  /* BOTONES TRANSPARENTES (TUS PORCENTAJES INTACTOS) */
   .button {
     position: absolute;
     transform: translateX(-50%);
@@ -147,18 +150,18 @@
 <div class="container" id="content" style="display:none;">
   <img src="boda.png" alt="Invitación Romer y Olimpia">
   
-  <!-- BOTONES CON TUS PORCENTAJES EXACTOS -->
+  <!-- BOTONES (COORDENADAS EXACTAS QUE TÚ CALIBRASTE) -->
   
   <!-- 1. Ceremonia Religiosa -->
-  <div class="button" style="top:47.8%; left:50%; width:45%; height:2.2%;" 
+  <div class="button" style="top:53.5%; left:50%; width:45%; height:1.8%;" 
        onclick="window.open('https://maps.app.goo.gl/nqKPxbnzh6HYbzx87?g_st=ac')"></div>
 
   <!-- 2. Recepción Social -->
-  <div class="button" style="top:53.3%; left:50%; width:45%; height:2.2%;" 
+  <div class="button" style="top:59.5%; left:50%; width:45%; height:1.8%;" 
        onclick="window.open('https://maps.app.goo.gl/DuaEr2rcxSi4ebDC6?g_st=ac')"></div>
 
   <!-- 3. Comparte tus fotos -->
-  <div class="button" style="top:97.8%; left:50%; width:55%; height:1.8%;" 
+  <div class="button" style="top:88.2%; left:50%; width:55%; height:1.8%;" 
        onclick="window.open('https://drive.google.com/drive/folders/1gJgvDXrxrMIhmsh2E-6GglrGDdgDoGdH?usp=sharing')"></div>
 </div>
 
